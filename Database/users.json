@@ -1,0 +1,58 @@
+[
+  {
+    "username": "client1",
+    "password": "client1pass",
+    "account_number": "100001",
+    "fullname": "Client One",
+    "balance": 5000,
+    "age": 35
+  },
+  {
+    "username": "client2",
+    "password": "client2pass",
+    "account_number": "100002",
+    "fullname": "Client Two",
+    "balance": 7500,
+    "age": 45
+  },
+  {
+    "username": "client3",
+    "password": "client3pass",
+    "account_number": "100003",
+    "fullname": "Client Three",
+    "balance": 3000,
+    "age": 28
+  },
+  {
+    "username": "client4",
+    "password": "client4pass",
+    "account_number": "100004",
+    "fullname": "Client Four",
+    "balance": 10000,
+    "age": 50
+  },
+  {
+    "username": "admin1",
+    "password": "admin1pass",
+    "account_number": "200001",
+    "fullname": "Admin One",
+    "balance": 15000,
+    "age": 40
+  },
+  {
+    "username": "admin2",
+    "password": "admin2pass",
+    "account_number": "200002",
+    "fullname": "Admin Two",
+    "balance": 20000,
+    "age": 45
+  },
+  {
+    "username": "admin3",
+    "password": "admin3pass",
+    "account_number": "200003",
+    "fullname": "Admin Three",
+    "balance": 25000,
+    "age": 50
+  }
+]
