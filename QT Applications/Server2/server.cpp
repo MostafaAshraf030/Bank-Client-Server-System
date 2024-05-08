@@ -5,6 +5,10 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <QEventLoop>
+#include <QString>
+#include <QJsonArray>
+
+
 
 const QString NODE_RED_URL = "http://192.168.1.9:8080";
 
@@ -58,8 +62,8 @@ void Server::handleClientData()
     if (!socket)
         return;
 
-    QByteArray requestData = socket->readAll();
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(requestData);
+    QByteArray requestDataByteArray = socket->readAll();
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(requestDataByteArray);
 
     if (jsonDoc.isNull()) {
         qDebug() << "Failed to parse JSON data";
@@ -72,21 +76,21 @@ void Server::handleClientData()
     QJsonObject jsonObj = jsonDoc.object();
 
     QString requestType = jsonObj["type"].toString();
-    QJsonObject requestData = jsonObj["data"].toObject();
+    QJsonObject requestDataObject = jsonObj["data"].toObject();
 
     QString response;
 
     if (requestType == "LogIn") {
-        QString username = requestData["username"].toString();
-        QString password = requestData["password"].toString();
+        QString username = requestDataObject["username"].toString();
+        QString password = requestDataObject["password"].toString();
         bool isAuthenticated = checkCredentials(username, password);
         response = isAuthenticated ? "true" : "false";
     } else if (requestType == "GetAccountNumber") {
-        QString username = requestData["username"].toString();
+        QString username = requestDataObject["username"].toString();
         QString accountNumber = getAccountNumberByUsername(username);
         response = accountNumber;
     } else if (requestType == "GetAccountNumberAdmin") {
-        QString username = requestData["username"].toString();
+        QString username = requestDataObject["username"].toString();
         bool isAdmin = checkAdminPrivileges(username);
         if (isAdmin) {
             QString accountNumber = getAccountNumberByUsername(username);
@@ -95,38 +99,38 @@ void Server::handleClientData()
             response = "Insufficient privileges";
         }
     } else if (requestType == "ViewAccountBalance") {
-        QString accountNumber = requestData["accountNumber"].toString();
+        QString accountNumber = requestDataObject["accountNumber"].toString();
         int balance = getAccountBalanceByNumber(accountNumber);
         response = QString::number(balance);
     } else if (requestType == "ViewTransactionHistory") {
-        QString accountNumber = requestData["accountNumber"].toString();
-        int count = requestData["count"].toInt();
+        QString accountNumber = requestDataObject["accountNumber"].toString();
+        int count = requestDataObject["count"].toInt();
         QString transactionHistory = getTransactionHistoryByNumber(accountNumber, count);
         response = transactionHistory;
     } else if (requestType == "MakeTransaction") {
-        QString accountNumber = requestData["accountNumber"].toString();
-        int transactionAmount = requestData["amount"].toInt();
+        QString accountNumber = requestDataObject["accountNumber"].toString();
+        int transactionAmount = requestDataObject["amount"].toInt();
         bool success = makeTransaction(accountNumber, transactionAmount);
         response = success ? "true" : "false";
     } else if (requestType == "MakeTransfer") {
-        QString fromAccountNumber = requestData["fromAccountNumber"].toString();
-        QString toAccountNumber = requestData["toAccountNumber"].toString();
-        int transferAmount = requestData["amount"].toInt();
+        QString fromAccountNumber = requestDataObject["fromAccountNumber"].toString();
+        QString toAccountNumber = requestDataObject["toAccountNumber"].toString();
+        int transferAmount = requestDataObject["amount"].toInt();
         bool success = makeTransfer(fromAccountNumber, toAccountNumber, transferAmount);
         response = success ? "true" : "false";
     } else if (requestType == "ViewBankDatabase") {
         QString bankDatabase = getBankDatabase();
         response = bankDatabase;
     } else if (requestType == "CreateNewUser") {
-        QString userData = requestData["userData"].toString();
+        QString userData = requestDataObject["userData"].toString();
         bool success = createNewUser(userData);
         response = success ? "true" : "false";
     } else if (requestType == "DeleteUser") {
-        QString userData = requestData["userData"].toString();
+        QString userData = requestDataObject["userData"].toString();
         bool success = deleteUser(userData);
         response = success ? "true" : "false";
     } else if (requestType == "UpdateUser") {
-        QString userData = requestData["userData"].toString();
+        QString userData = requestDataObject["userData"].toString();
         bool success = updateUser(userData);
         response = success ? "true" : "false";
     } else {
@@ -139,6 +143,7 @@ void Server::handleClientData()
     socket->waitForBytesWritten();
     socket->close();
 }
+
 
 
 void Server::socketDisconnected()

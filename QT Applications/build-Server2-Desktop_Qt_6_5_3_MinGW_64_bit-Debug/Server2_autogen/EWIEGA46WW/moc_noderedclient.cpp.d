@@ -1,5 +1,6 @@
 C:/Users/Mostafa\ Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/EWIEGA46WW/moc_noderedclient.cpp: C:/Users/Mostafa\ Ashraf/Desktop/ITIDA/QT_WS/Server2/noderedclient.h \
   C:/Users/Mostafa\ Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/moc_predefs.h \
+  D:/QT/6.5.3/mingw_64/include/QtCore/QDebug \
   D:/QT/6.5.3/mingw_64/include/QtCore/QObject \
   D:/QT/6.5.3/mingw_64/include/QtCore/q20memory.h \
   D:/QT/6.5.3/mingw_64/include/QtCore/q20type_traits.h \

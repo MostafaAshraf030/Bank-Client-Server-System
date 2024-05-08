@@ -183,7 +183,7 @@ build Server2_autogen/timestamp Server2_autogen/mocs_compilation.cpp | ${cmake_n
 #############################################
 # Phony custom command for CMakeFiles\Server2_autogen_timestamp_deps
 
-build CMakeFiles/Server2_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/Server2_autogen_timestamp_deps: phony D$:/QT/6.5.3/mingw_64/lib/libQt6Network.a D$:/QT/6.5.3/mingw_64/lib/libQt6Core.a D$:/QT/6.5.3/mingw_64/./bin/moc.exe
+build CMakeFiles/Server2_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/Server2_autogen_timestamp_deps: phony D$:/QT/6.5.3/mingw_64/lib/libQt6Core.a D$:/QT/6.5.3/mingw_64/./bin/moc.exe D$:/QT/6.5.3/mingw_64/lib/libQt6Network.a
 
 
 #############################################
