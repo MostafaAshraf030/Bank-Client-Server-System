@@ -77,13 +77,21 @@ void Server::handleClientData()
 
     QString requestType = jsonObj["type"].toString();
     QJsonObject requestDataObject = jsonObj["data"].toObject();
+<<<<<<< HEAD
     QString role;
+=======
+
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
     QString response;
 
     if (requestType == "LogIn") {
         QString username = requestDataObject["username"].toString();
         QString password = requestDataObject["password"].toString();
+<<<<<<< HEAD
         bool isAuthenticated = checkCredentials(username, password, role);
+=======
+        bool isAuthenticated = checkCredentials(username, password);
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
         response = isAuthenticated ? "true" : "false";
     } else if (requestType == "GetAccountNumber") {
         QString username = requestDataObject["username"].toString();
@@ -144,6 +152,7 @@ void Server::handleClientData()
     socket->close();
 }
 
+<<<<<<< HEAD
 QString Server::getRoleByUsername(const QString &username)
 {
     QNetworkAccessManager manager;
@@ -174,6 +183,8 @@ QString Server::getRoleByUsername(const QString &username)
     return role;
 }
 
+=======
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
 
 
 void Server::socketDisconnected()
@@ -197,6 +208,7 @@ void Server::processLoginRequest(QTcpSocket *socket, const QStringList &parts)
 
     QString username = parts[1];
     QString password = parts[2];
+<<<<<<< HEAD
     QString role; // Variable to store the user's role
 
     // Call checkCredentials with username, password, and role as parameters
@@ -211,11 +223,18 @@ void Server::processLoginRequest(QTcpSocket *socket, const QStringList &parts)
 
     // Send the response
     socket->write(responseDoc.toJson());
+=======
+    bool isAuthenticated = checkCredentials(username, password);
+    socket->write(isAuthenticated ? "true" : "false");
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
     socket->flush();
     socket->close();
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
 void Server::processAccountNumberRequest(QTcpSocket *socket, const QStringList &parts)
 {
     if (parts.size() < 2) {
@@ -380,7 +399,11 @@ void Server::processAdminPrivilegesRequest(QTcpSocket *socket, const QStringList
 }
 
 
+<<<<<<< HEAD
 bool Server::checkCredentials(const QString &username, const QString &password, QString &role)
+=======
+bool Server::checkCredentials(const QString &username, const QString &password)
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
 {
     QNetworkAccessManager manager;
     QNetworkRequest request(QUrl(NODE_RED_URL + "/checkCredentials"));
@@ -404,7 +427,10 @@ bool Server::checkCredentials(const QString &username, const QString &password, 
         QByteArray responseData = reply->readAll();
         QJsonDocument responseDoc = QJsonDocument::fromJson(responseData);
         isAuthenticated = responseDoc.object().value("authenticated").toBool();
+<<<<<<< HEAD
         role = responseDoc.object().value("role").toString();
+=======
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
     } else {
         qDebug() << "Network error:" << reply->errorString();
     }
@@ -413,7 +439,10 @@ bool Server::checkCredentials(const QString &username, const QString &password, 
     return isAuthenticated;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
 QString Server::getAccountNumberByUsername(const QString &username)
 {
     QNetworkAccessManager manager;

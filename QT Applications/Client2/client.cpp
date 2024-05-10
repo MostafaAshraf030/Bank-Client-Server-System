@@ -49,11 +49,17 @@ void CmyClient::processLoginResponse() {
         inStream >> userRole;
         isAdmin = (userRole == 1);
         if (isAdmin) {
+<<<<<<< HEAD
             qInfo() << "You are logged in as an admin.";
             showAdminMenu(); // Display admin menu
         } else {
             qInfo() << "You are logged in as a regular user.";
             showUserMenu(); // Display regular user menu
+=======
+            showAdminMenu();
+        } else {
+            showUserMenu();
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
         }
     } else {
         qInfo() << "Login failed. Please try again.";
@@ -61,8 +67,11 @@ void CmyClient::processLoginResponse() {
     }
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
 void CmyClient::showAdminMenu() {
     qInfo() << "Admin Authorized list:";
     qInfo() << "1. View Account";

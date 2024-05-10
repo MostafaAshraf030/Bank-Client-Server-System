@@ -42,7 +42,11 @@ private:
     void processAdminPrivilegesRequest(QTcpSocket *socket, const QStringList &parts);
 
     // Communication with Node-RED
+<<<<<<< HEAD
     bool checkCredentials(const QString &username, const QString &password, QString &role);
+=======
+    bool checkCredentials(const QString &username, const QString &password);
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
     QString getAccountNumberByUsername(const QString &username);
     int getAccountBalanceByNumber(const QString &accountNumber);
     QString getTransactionHistoryByNumber(const QString &accountNumber, int count);
@@ -53,7 +57,10 @@ private:
     bool deleteUser(const QString &userData);
     bool updateUser(const QString &userData);
     bool checkAdminPrivileges(const QString &username);
+<<<<<<< HEAD
     QString getRoleByUsername(const QString &username);
+=======
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
 };
 
 #endif // SERVER_H

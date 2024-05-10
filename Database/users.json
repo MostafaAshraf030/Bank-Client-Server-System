@@ -5,8 +5,12 @@
     "account_number": "100001",
     "fullname": "Client One",
     "balance": 5000,
+<<<<<<< HEAD
     "age": 35,
     "role": "user"
+=======
+    "age": 35
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
   },
   {
     "username": "client2",
@@ -14,8 +18,12 @@
     "account_number": "100002",
     "fullname": "Client Two",
     "balance": 7500,
+<<<<<<< HEAD
     "age": 45,
     "role": "user"
+=======
+    "age": 45
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
   },
   {
     "username": "client3",
@@ -23,8 +31,12 @@
     "account_number": "100003",
     "fullname": "Client Three",
     "balance": 3000,
+<<<<<<< HEAD
     "age": 28,
     "role": "user"
+=======
+    "age": 28
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
   },
   {
     "username": "client4",
@@ -32,31 +44,50 @@
     "account_number": "100004",
     "fullname": "Client Four",
     "balance": 10000,
+<<<<<<< HEAD
     "age": 50,
     "role": "user"
+=======
+    "age": 50
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
   },
   {
     "username": "admin1",
     "password": "admin1pass",
     "account_number": "200001",
     "fullname": "Admin One",
+<<<<<<< HEAD
     "age": 40,
     "role": "admin"
+=======
+    "balance": 15000,
+    "age": 40
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
   },
   {
     "username": "admin2",
     "password": "admin2pass",
     "account_number": "200002",
     "fullname": "Admin Two",
+<<<<<<< HEAD
     "age": 45,
     "role": "admin"
+=======
+    "balance": 20000,
+    "age": 45
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
   },
   {
     "username": "admin3",
     "password": "admin3pass",
     "account_number": "200003",
     "fullname": "Admin Three",
+<<<<<<< HEAD
     "age": 50,
     "role": "admin"
+=======
+    "balance": 25000,
+    "age": 50
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
   }
 ]

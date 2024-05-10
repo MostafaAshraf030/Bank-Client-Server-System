@@ -82,9 +82,12 @@
 34	353	7368667384413044	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Client2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Client2_autogen/mocs_compilation.cpp	d2a29d2ce4b91b4b
 365	6438	7368667445238178	CMakeFiles/Client2.dir/client.cpp.obj	ece0996b75102750
 6439	6880	7368667449605664	Client2.exe	f8dd6edb9615359a
+<<<<<<< HEAD
 23	286	7370033034908760	Client2_autogen/timestamp	d2a29d2ce4b91b4b
 23	286	7370033034908760	Client2_autogen/mocs_compilation.cpp	d2a29d2ce4b91b4b
 23	286	7370033034908760	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Client2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Client2_autogen/timestamp	d2a29d2ce4b91b4b
 23	286	7370033034908760	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Client2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Client2_autogen/mocs_compilation.cpp	d2a29d2ce4b91b4b
 293	4521	7370033077278702	CMakeFiles/Client2.dir/client.cpp.obj	ece0996b75102750
 4522	5240	7370033084301938	Client2.exe	f8dd6edb9615359a
+=======
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74

@@ -1,4 +1,5 @@
 # ninja log v5
+<<<<<<< HEAD
 22	259	7369977828410604	Server2_autogen/timestamp	1ca486259deda418
 1638	8607	7369974610247384	CMakeFiles/Server2.dir/Server2_autogen/mocs_compilation.cpp.obj	121ef2b35a631213
 266	6018	7369977885941940	CMakeFiles/Server2.dir/server.cpp.obj	4fdda8e2c5f966a2
@@ -54,3 +55,20 @@
 34	377	7370021326210784	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
 388	7793	7370021400338432	CMakeFiles/Server2.dir/server.cpp.obj	4fdda8e2c5f966a2
 7795	8464	7370021406974613	Server2.exe	b3a67d095db251c4
+=======
+36	528	7368680858363594	Server2_autogen/timestamp	1ca486259deda418
+5609	12368	7368679533732191	CMakeFiles/Server2.dir/Server2_autogen/mocs_compilation.cpp.obj	121ef2b35a631213
+36	528	7368680858363594	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+541	7924	7368680932311177	CMakeFiles/Server2.dir/server.cpp.obj	4fdda8e2c5f966a2
+36	528	7368680858363594	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+36	528	7368680858363594	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+1477	8313	7368671590459333	CMakeFiles/Server2.dir/main.cpp.obj	3fec73fe3cbd5041
+7926	8588	7368680938897390	Server2.exe	aca61670051bbf16
+5601	12703	7368679537809848	CMakeFiles/Server2.dir/noderedclient.cpp.obj	c3ea21342a5241e7
+21	492	7368681476787572	Server2_autogen/timestamp	1ca486259deda418
+21	492	7368681476787572	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+21	492	7368681476787572	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+21	492	7368681476787572	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+494	4191	7368681516085253	CMakeFiles/Server2.dir/Server2_autogen/mocs_compilation.cpp.obj	121ef2b35a631213
+4193	4650	7368681520602669	Server2.exe	b3a67d095db251c4
+>>>>>>> 2d72460567a706e0fcec3850d1755ccaf2744a74
