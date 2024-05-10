@@ -1,0 +1,210 @@
+[
+    {
+        "id": "a50c0361eceeca14",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "0aebe3ef61eff633",
+        "type": "tcp in",
+        "z": "a50c0361eceeca14",
+        "name": "TCP In",
+        "server": "server",
+        "host": "",
+        "port": "8080",
+        "datamode": "stream",
+        "datatype": "buffer",
+        "newline": "",
+        "topic": "",
+        "base64": false,
+        "tls": "",
+        "x": 70,
+        "y": 60,
+        "wires": [
+            [
+                "fefda72abb6345fd"
+            ]
+        ]
+    },
+    {
+        "id": "30b621c5dcc83b82",
+        "type": "tcp out",
+        "z": "a50c0361eceeca14",
+        "name": "TCP Out",
+        "host": "192.168.1.9",
+        "port": "8080",
+        "beserver": "client",
+        "base64": false,
+        "end": false,
+        "tls": "",
+        "x": 1000,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "735114c75e7886fd",
+        "type": "function",
+        "z": "a50c0361eceeca14",
+        "name": "Parse JSON Data Function",
+        "func": "// Parse the JSON data retrieved from the file\ntry {\n    var jsonData = JSON.parse(msg.payload);\n\n    // Extract data from the JSON object\n    var username = jsonData.username;\n    var password = jsonData.password;\n    var accountNumber = jsonData.account_number;\n    var fullname = jsonData.fullname;\n    var balance = jsonData.balance;\n    var age = jsonData.age;\n    var role = jsonData.role; // Include role field\n\n    // Check the user's role before proceeding\n    if (role === 'user' || role === 'admin') {\n        // Construct the Cassandra insertion query\n        var query = `\n            INSERT INTO bank_keyspace.user \n            (username, password, account_number, fullname, balance, age, role) \n            VALUES \n            (?, ?, ?, ?, ?, ?, ?)\n        `;\n\n        // Parameters to be passed with the query\n        var params = [username, password, accountNumber, fullname, balance, age, role];\n\n        // Create a new message object with the query and parameters\n        var newMsg = {\n            topic: \"Cassandra Query\", // Topic for routing to the database node\n            payload: {\n                query: query, // Cassandra query to be executed\n                params: params // Parameters for the query\n            }\n        };\n\n        // Pass the message to the next node (Cassandra node)\n        return newMsg;\n    } else {\n        // Handle invalid user role\n        console.error(\"Invalid user role:\", role);\n        // Optionally, return an error message or handle the error in a different way\n    }\n} catch (error) {\n    // Handle parsing errors\n    console.error(\"Error parsing JSON:\", error.message);\n    // Optionally, you can return an error message or handle the error in a different way\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 320,
+        "wires": [
+            [
+                "55a4fde1ef4a35dc",
+                "a972746d1e218176"
+            ]
+        ]
+    },
+    {
+        "id": "fefda72abb6345fd",
+        "type": "function",
+        "z": "a50c0361eceeca14",
+        "name": "Parse Received Data Function",
+        "func": "// Parse received data\nvar data = msg.payload.toString(); // Convert Buffer to string\nvar jsonData = JSON.parse(data); // Parse JSON data\n\n// Extract values from the JSON object\nvar username = jsonData.username;\nvar password = jsonData.password;\nvar accountNumber = jsonData.account_number;\nvar fullname = jsonData.fullname;\nvar balance = jsonData.balance;\nvar age = jsonData.age;\nvar role = jsonData.role; // Include role field\n\n// Check the user's role before proceeding\nif (role === 'user' || role === 'admin') {\n    // Construct the Cassandra query to insert the data into the user table\n    var query = `\n        INSERT INTO bank_keyspace.user \n        (username, password, account_number, fullname, balance, age, role) \n        VALUES \n        ('${username}', '${password}', '${accountNumber}', '${fullname}', ${balance}, ${age}, '${role}');\n    `;\n\n    // Create a new message object with the query as the payload\n    var newMsg = {\n        topic: \"Cassandra Query\", // Topic for routing to the database node\n        payload: query // Cassandra query to be executed\n    };\n\n    // Pass the message to the next node (Cassandra node)\n    return newMsg;\n} else {\n    // Handle invalid user role\n    console.error(\"Invalid user role:\", role);\n    // Optionally, return an error message or handle the error in a different way\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 190,
+        "y": 200,
+        "wires": [
+            [
+                "8ab3b52d993622c6",
+                "a972746d1e218176"
+            ]
+        ]
+    },
+    {
+        "id": "55a4fde1ef4a35dc",
+        "type": "debug",
+        "z": "a50c0361eceeca14",
+        "name": "Debug Parsed JSON Data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "8ab3b52d993622c6",
+        "type": "debug",
+        "z": "a50c0361eceeca14",
+        "name": "Debug Parsed Received Data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 390,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e3aaf870e84a1c3c",
+        "type": "debug",
+        "z": "a50c0361eceeca14",
+        "name": "Debug Database",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "16bcd713fa082e09",
+        "type": "function",
+        "z": "a50c0361eceeca14",
+        "name": "Parse Incoming Message Payload Function",
+        "func": "// Parse the incoming message payload\nvar requestData = msg.payload;\n\n// Declare variables\nvar accountNumber, query, newMsg;\n\n// Check the type of request\nif (requestData.type === 'insert') {\n    // Handle insert request\n    var username = requestData.data.username;\n    var password = requestData.data.password;\n    accountNumber = requestData.data.account_number;\n    var fullname = requestData.data.fullname;\n    var balance = requestData.data.balance;\n    var age = requestData.data.age;\n    var role = requestData.data.role; // Include role field\n\n    // Check the user's role before proceeding\n    if (role === 'user' || role === 'admin') {\n        // Construct the Cassandra insertion query\n        query = `\n            INSERT INTO bank_keyspace.user \n            (username, password, account_number, fullname, balance, age, role) \n            VALUES \n            (?, ?, ?, ?, ?, ?, ?)\n        `;\n\n        // Parameters to be passed with the query\n        var params = [username, password, accountNumber, fullname, balance, age, role];\n\n        // Create a new message object with the query and parameters\n        newMsg = {\n            topic: \"Cassandra Query\", // Topic for routing to the database node\n            payload: {\n                query: query, // Cassandra query to be executed\n                params: params // Parameters for the query\n            }\n        };\n    } else {\n        // Handle invalid user role\n        console.error(\"Invalid user role:\", role);\n        // Optionally, return an error message or handle the error in a different way\n    }\n} else if (requestData.type === 'update_balance') {\n    // Handle update balance request\n    accountNumber = requestData.data.account_number;\n    var newBalance = requestData.data.new_balance;\n    role = requestData.data.role; // Include role field\n\n    // Check the user's role before proceeding\n    if (role === 'admin') {\n        // Construct Cassandra query to update balance for the account\n        query = `\n            UPDATE bank_keyspace.user \n            SET balance = ${newBalance}\n            WHERE account_number = '${accountNumber}'\n        `;\n\n        // Create a new message object with the query\n        newMsg = {\n            topic: \"Cassandra Query\", // Topic for routing to the database node\n            payload: query // Cassandra query to be executed\n        };\n    } else {\n        // Handle unauthorized access\n        console.error(\"Unauthorized access: Insufficient privileges for updating balance\");\n        // Optionally, return an error message or handle the error in a different way\n    }\n} else {\n    // Handle unknown request type\n    node.warn(\"Unknown request type: \" + requestData.type);\n    newMsg = null;\n}\n\n// Pass the message to the next node (Cassandra node)\nreturn newMsg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 340,
+        "wires": [
+            [
+                "30b621c5dcc83b82",
+                "6679b0c4ba85040b"
+            ]
+        ]
+    },
+    {
+        "id": "6679b0c4ba85040b",
+        "type": "debug",
+        "z": "a50c0361eceeca14",
+        "name": "Debug Message Payload",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "32496ac0c53d3acd",
+        "type": "fileinject",
+        "z": "a50c0361eceeca14",
+        "name": "Json File Inject",
+        "x": 100,
+        "y": 480,
+        "wires": [
+            [
+                "735114c75e7886fd"
+            ]
+        ]
+    },
+    {
+        "id": "a972746d1e218176",
+        "type": "cassandra",
+        "z": "a50c0361eceeca14",
+        "mydb": "30f09fbde7db2e48",
+        "name": "Cassandra",
+        "x": 490,
+        "y": 220,
+        "wires": [
+            [
+                "e3aaf870e84a1c3c",
+                "16bcd713fa082e09"
+            ]
+        ]
+    },
+    {
+        "id": "30f09fbde7db2e48",
+        "type": "CassandraDatabase",
+        "hosts": "192.168.1.9",
+        "port": "9042",
+        "keyspace": "bank_keyspace"
+    }
+]
