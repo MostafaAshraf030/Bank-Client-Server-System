@@ -1,0 +1,56 @@
+# ninja log v5
+22	259	7369977828410604	Server2_autogen/timestamp	1ca486259deda418
+1638	8607	7369974610247384	CMakeFiles/Server2.dir/Server2_autogen/mocs_compilation.cpp.obj	121ef2b35a631213
+266	6018	7369977885941940	CMakeFiles/Server2.dir/server.cpp.obj	4fdda8e2c5f966a2
+22	259	7369977828410604	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+22	259	7369977828410604	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+22	259	7369977828410604	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+1645	8343	7369974607798783	CMakeFiles/Server2.dir/main.cpp.obj	3fec73fe3cbd5041
+4193	4650	7368681520602669	Server2.exe	b3a67d095db251c4
+5601	12703	7368679537809848	CMakeFiles/Server2.dir/noderedclient.cpp.obj	c3ea21342a5241e7
+37	1527	7370014090686573	Server2_autogen/timestamp	1ca486259deda418
+37	1527	7370014090686573	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+37	1527	7370014090686573	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+37	1527	7370014090686573	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+1536	8318	7370014160096899	CMakeFiles/Server2.dir/main.cpp.obj	3fec73fe3cbd5041
+1528	8415	7370014161076340	CMakeFiles/Server2.dir/Server2_autogen/mocs_compilation.cpp.obj	121ef2b35a631213
+23	552	7370014885251880	Server2_autogen/timestamp	1ca486259deda418
+23	552	7370014885251880	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+23	552	7370014885251880	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+23	552	7370014885251880	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+23	349	7370015432043589	Server2_autogen/timestamp	1ca486259deda418
+23	349	7370015432043589	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+23	349	7370015432043589	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+23	349	7370015432043589	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+36	1395	7370015998361017	Server2_autogen/timestamp	1ca486259deda418
+36	1395	7370015998361017	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+36	1395	7370015998361017	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+36	1395	7370015998361017	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+1404	8262	7370016068111169	CMakeFiles/Server2.dir/main.cpp.obj	3fec73fe3cbd5041
+1397	8456	7370016070060052	CMakeFiles/Server2.dir/Server2_autogen/mocs_compilation.cpp.obj	121ef2b35a631213
+37	1470	7370017894293288	Server2_autogen/timestamp	1ca486259deda418
+37	1470	7370017894293288	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+37	1470	7370017894293288	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+37	1470	7370017894293288	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+43	1459	7370018235795996	Server2_autogen/timestamp	1ca486259deda418
+43	1459	7370018235795996	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+43	1459	7370018235795996	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+43	1459	7370018235795996	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+1461	8234	7370018304666647	CMakeFiles/Server2.dir/Server2_autogen/mocs_compilation.cpp.obj	121ef2b35a631213
+1468	8459	7370018306845407	CMakeFiles/Server2.dir/main.cpp.obj	3fec73fe3cbd5041
+38	1594	7370019805151612	Server2_autogen/timestamp	1ca486259deda418
+38	1594	7370019805151612	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+38	1594	7370019805151612	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+38	1594	7370019805151612	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+1595	7982	7370019870334366	CMakeFiles/Server2.dir/main.cpp.obj	3fec73fe3cbd5041
+1603	12254	7370019913239829	CMakeFiles/Server2.dir/Server2_autogen/mocs_compilation.cpp.obj	121ef2b35a631213
+21	268	7370020774863608	Server2_autogen/timestamp	1ca486259deda418
+21	268	7370020774863608	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+21	268	7370020774863608	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+21	268	7370020774863608	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+34	377	7370021326210784	Server2_autogen/timestamp	1ca486259deda418
+34	377	7370021326210784	Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+34	377	7370021326210784	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/timestamp	1ca486259deda418
+34	377	7370021326210784	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server2-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server2_autogen/mocs_compilation.cpp	1ca486259deda418
+388	7793	7370021400338432	CMakeFiles/Server2.dir/server.cpp.obj	4fdda8e2c5f966a2
+7795	8464	7370021406974613	Server2.exe	b3a67d095db251c4
