@@ -13,7 +13,7 @@ CmyClient::CmyClient(QObject *parent) : QObject(parent), isAdmin(false) {
     connect(&socket, &QTcpSocket::readyRead, this, &CmyClient::readyRead);
     connect(&socket, &QTcpSocket::errorOccurred, this, &CmyClient::error);
 
-    connectToHost("192.168.1.9", 8080); // Adjust host and port according to your server setup
+    //connectToHost("192.168.1.9", 80);
 }
 
 void CmyClient::disconnect() {

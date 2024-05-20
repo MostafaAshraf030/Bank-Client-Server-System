@@ -1,62 +1,62 @@
 [
   {
-    "username": "client1",
-    "password": "client1pass",
+    "username": "mostafa",
+    "password": "MA11111",
     "account_number": "100001",
-    "fullname": "Client One",
-    "balance": 5000,
+    "fullname": "Mostafa Ashraf",
+    "balance": 10000,
+    "age": 24,
+    "role": "user"
+  },
+  {
+    "username": "ahmed",
+    "password": "AK22222",
+    "account_number": "100002",
+    "fullname": "Ahmed Khaled",
+    "balance": 7500,
     "age": 35,
     "role": "user"
   },
   {
-    "username": "client2",
-    "password": "client2pass",
-    "account_number": "100002",
-    "fullname": "Client Two",
-    "balance": 7500,
-    "age": 45,
-    "role": "user"
-  },
-  {
-    "username": "client3",
-    "password": "client3pass",
+    "username": "ali",
+    "password": "AA33333",
     "account_number": "100003",
-    "fullname": "Client Three",
+    "fullname": "Ali Ahmed",
     "balance": 3000,
     "age": 28,
     "role": "user"
   },
   {
-    "username": "client4",
-    "password": "client4pass",
+    "username": "mohamed",
+    "password": "MH44444",
     "account_number": "100004",
-    "fullname": "Client Four",
-    "balance": 10000,
+    "fullname": "Mohamed Hassan",
+    "balance": 5000,
     "age": 50,
     "role": "user"
   },
   {
-    "username": "admin1",
-    "password": "admin1pass",
+    "username": "seif",
+    "password": "SA11111",
     "account_number": "200001",
-    "fullname": "Admin One",
-    "age": 40,
+    "fullname": "Seif Ali",
+    "age": 20,
     "role": "admin"
   },
   {
-    "username": "admin2",
-    "password": "admin2pass",
+    "username": "salah",
+    "password": "SA22222",
     "account_number": "200002",
-    "fullname": "Admin Two",
+    "fullname": "Salah Adel",
     "age": 45,
     "role": "admin"
   },
   {
-    "username": "admin3",
-    "password": "admin3pass",
+    "username": "fawzi",
+    "password": "FM33333",
     "account_number": "200003",
-    "fullname": "Admin Three",
-    "age": 50,
+    "fullname": "Fawzi Mohamed",
+    "age": 27,
     "role": "admin"
   }
 ]

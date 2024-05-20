@@ -24,7 +24,7 @@ private slots:
 
 private:
     // Private variables
-    const QString NODE_RED_URL = "http://localhost:1880"; // Adjust with your Node-RED server URL
+    const QString NODE_RED_URL = "http://localhost:1880";
     QTcpServer *tcpServer;
     QList<QTcpSocket*> connectedSockets;
 
@@ -53,7 +53,7 @@ private:
     bool deleteUser(const QString &userData);
     bool updateUser(const QString &userData);
     bool checkAdminPrivileges(const QString &username);
-    QString getRoleByUsername(const QString &username);
+    //QString getRoleByUsername(const QString &username);
 };
 
 #endif // SERVER_H

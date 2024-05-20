@@ -10,7 +10,7 @@
 
 
 
-const QString NODE_RED_URL = "http://192.168.1.9:8080";
+//const QString NODE_RED_URL = "http://localhost:1880";
 
 Server::Server(QObject *parent) : QObject(parent), tcpServer(new QTcpServer(this))
 {
@@ -144,7 +144,7 @@ void Server::handleClientData()
     socket->close();
 }
 
-QString Server::getRoleByUsername(const QString &username)
+/*QString Server::getRoleByUsername(const QString &username)
 {
     QNetworkAccessManager manager;
     QNetworkRequest request(QUrl(NODE_RED_URL + "/getRoleByUsername"));
@@ -172,7 +172,7 @@ QString Server::getRoleByUsername(const QString &username)
 
     reply->deleteLater();
     return role;
-}
+}*/
 
 
 
@@ -723,4 +723,3 @@ bool Server::checkAdminPrivileges(const QString &username)
     reply->deleteLater();
     return isAdmin;
 }
-
