@@ -20,6 +20,11 @@ CREATE TABLE IF NOT EXISTS transaction_history (
     FOREIGN KEY (account_number) REFERENCES user(account_number)
 );
 
+CREATE TABLE IF NOT EXISTS debug_log (
+    log_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    message TEXT
+);
+
 DELIMITER //
 
 DROP PROCEDURE IF EXISTS MakeTransfer;
@@ -32,25 +37,33 @@ CREATE PROCEDURE MakeTransfer(
 BEGIN
     DECLARE from_balance DECIMAL(15,2);
 
+    -- Logging
+    INSERT INTO debug_log (message) VALUES (CONCAT('Start transfer from ', from_account_number, ' to ', to_account_number, ' amount ', transfer_amount));
+
     -- Check if the from account has enough balance
     SELECT balance INTO from_balance
     FROM user
     WHERE account_number = from_account_number;
 
     IF from_balance IS NULL THEN
+        INSERT INTO debug_log (message) VALUES ('Source account does not exist');
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Source account does not exist';
     ELSEIF from_balance < transfer_amount THEN
+        INSERT INTO debug_log (message) VALUES ('Insufficient funds');
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'Insufficient funds';
     ELSE
         -- Check if the to account exists
         IF (SELECT COUNT(*) FROM user WHERE account_number = to_account_number) = 0 THEN
+            INSERT INTO debug_log (message) VALUES ('Destination account does not exist');
             SIGNAL SQLSTATE '45000'
             SET MESSAGE_TEXT = 'Destination account does not exist';
         ELSE
             START TRANSACTION;
-            
+
+            INSERT INTO debug_log (message) VALUES ('Transaction started');
+
             -- Deduct from source account
             UPDATE user 
             SET balance = balance - transfer_amount
@@ -71,9 +84,13 @@ BEGIN
             (account_number, transaction_time, transaction_amount) 
             VALUES (to_account_number, NOW(), transfer_amount);
 
+            INSERT INTO debug_log (message) VALUES ('Transaction committed');
+            
             COMMIT;
         END IF;
     END IF;
+
+    INSERT INTO debug_log (message) VALUES ('End of transfer');
 END //
 
 DELIMITER ;

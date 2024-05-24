@@ -1,0 +1,91 @@
+# ninja log v5
+12	343	7381938160927656	Server3_autogen/timestamp	60038db2bde4310b
+12	343	7381938160927656	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+12	343	7381938160927656	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+1950	13364	7381896102257841	CMakeFiles/Server3.dir/Server3_autogen/mocs_compilation.cpp.obj	cdea279f9c8a5e0f
+12	343	7381938160927656	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+1958	13475	7381896107874624	CMakeFiles/Server3.dir/main.cpp.obj	f7cba9fe620379a8
+7329	8198	7381938239323530	Server3.exe	be796e3fe44ce8f6
+355	7327	7381938230746267	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+14	345	7381941832589506	Server3_autogen/timestamp	60038db2bde4310b
+14	345	7381941832589506	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+14	345	7381941832589506	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+14	345	7381941832589506	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+357	7273	7381941901900061	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+7274	7853	7381941907546628	Server3.exe	be796e3fe44ce8f6
+16	308	7381945035835143	Server3_autogen/timestamp	60038db2bde4310b
+16	308	7381945035835143	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+16	308	7381945035835143	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+16	308	7381945035835143	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+321	7400	7381945106644642	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+7401	8067	7381945113160931	Server3.exe	be796e3fe44ce8f6
+23	1235	7381953342928759	Server3_autogen/timestamp	60038db2bde4310b
+23	1235	7381953342928759	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+23	1235	7381953342928759	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+23	1235	7381953342928759	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+1244	8819	7381953419914706	CMakeFiles/Server3.dir/main.cpp.obj	f7cba9fe620379a8
+1237	9279	7381953424562056	CMakeFiles/Server3.dir/Server3_autogen/mocs_compilation.cpp.obj	cdea279f9c8a5e0f
+1251	10500	7381953436715103	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+10501	11205	7381953443711116	Server3.exe	be796e3fe44ce8f6
+32	382	7381977207011465	Server3_autogen/timestamp	60038db2bde4310b
+32	382	7381977207011465	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+32	382	7381977207011465	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+32	382	7381977207011465	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+32	1752	7381977863365532	Server3_autogen/timestamp	60038db2bde4310b
+32	1752	7381977863365532	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+32	1752	7381977863365532	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+32	1752	7381977863365532	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+1754	10711	7381977954513385	CMakeFiles/Server3.dir/main.cpp.obj	f7cba9fe620379a8
+1762	11179	7381977959140740	CMakeFiles/Server3.dir/Server3_autogen/mocs_compilation.cpp.obj	cdea279f9c8a5e0f
+1831	12233	7381977969624750	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+12234	13258	7381977980008832	Server3.exe	be796e3fe44ce8f6
+24	467	7381987513857652	Server3_autogen/timestamp	60038db2bde4310b
+24	467	7381987513857652	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+24	467	7381987513857652	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+24	467	7381987513857652	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+476	7577	7381987585127085	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+7579	8375	7381987592962386	Server3.exe	be796e3fe44ce8f6
+23	288	7382016841894974	Server3_autogen/timestamp	60038db2bde4310b
+23	288	7382016841894974	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+23	288	7382016841894974	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+23	288	7382016841894974	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+29	358	7382017205665401	Server3_autogen/timestamp	60038db2bde4310b
+29	358	7382017205665401	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+29	358	7382017205665401	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+29	358	7382017205665401	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+25	342	7382018013763184	Server3_autogen/timestamp	60038db2bde4310b
+25	342	7382018013763184	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+25	342	7382018013763184	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+25	342	7382018013763184	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+30	1652	7382018399343845	Server3_autogen/timestamp	60038db2bde4310b
+30	1652	7382018399343845	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+30	1652	7382018399343845	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+30	1652	7382018399343845	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+1654	10396	7382018487793240	CMakeFiles/Server3.dir/main.cpp.obj	f7cba9fe620379a8
+1661	11719	7382018491491125	CMakeFiles/Server3.dir/Server3_autogen/mocs_compilation.cpp.obj	cdea279f9c8a5e0f
+1668	11776	7382018501265531	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+11777	12692	7382018511289780	Server3.exe	be796e3fe44ce8f6
+11	262	7382043101404208	Server3_autogen/timestamp	60038db2bde4310b
+11	262	7382043101404208	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+11	262	7382043101404208	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+11	262	7382043101404208	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+270	5987	7382043158602521	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+5989	6590	7382043164589092	Server3.exe	be796e3fe44ce8f6
+28	273	7382052296429669	Server3_autogen/timestamp	60038db2bde4310b
+28	273	7382052296429669	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+28	273	7382052296429669	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+28	273	7382052296429669	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+281	5965	7382052353277154	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+5966	6501	7382052358624113	Server3.exe	be796e3fe44ce8f6
+39	449	7382073680058339	Server3_autogen/timestamp	60038db2bde4310b
+39	449	7382073680058339	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+39	449	7382073680058339	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+39	449	7382073680058339	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+462	8484	7382073760446847	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+8485	9866	7382073774183193	Server3.exe	be796e3fe44ce8f6
+37	377	7382105285504119	Server3_autogen/timestamp	60038db2bde4310b
+37	377	7382105285504119	Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+37	377	7382105285504119	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/timestamp	60038db2bde4310b
+37	377	7382105285504119	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Server3_autogen/mocs_compilation.cpp	60038db2bde4310b
+390	7713	7382105358866876	CMakeFiles/Server3.dir/server.cpp.obj	30d00abc42b72b1f
+7714	8283	7382105364494953	Server3.exe	be796e3fe44ce8f6

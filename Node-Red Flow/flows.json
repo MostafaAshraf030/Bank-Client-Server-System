@@ -1,659 +1,2020 @@
 [
     {
-        "id": "2131b817f896fa4e",
+        "id": "3f73e11d2319b810",
         "type": "tab",
-        "label": "Flow 4",
+        "label": "MySQL Query Flow",
         "disabled": false,
-        "info": "",
-        "env": []
+        "info": ""
     },
     {
-        "id": "41fcb1de.41a6e8",
+        "id": "http-in",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Check Credentials",
+        "url": "/checkCredentials",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "check-credentials",
+                "e5162dd75671bedc"
+            ]
+        ]
+    },
+    {
+        "id": "check-credentials",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Check Credentials",
+        "func": "var username = msg.payload.username;\nvar password = msg.payload.password;\n\n// Construct SQL query\nmsg.topic = `SELECT * FROM user WHERE username='${username}' AND password='${password}'`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "mysql",
+                "47f9116caac810b1"
+            ]
+        ]
+    },
+    {
+        "id": "mysql",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 640,
+        "y": 160,
+        "wires": [
+            [
+                "5de82380e060a0f1",
+                "711b25830be06d33"
+            ]
+        ]
+    },
+    {
+        "id": "588854ebd38cd6a1",
         "type": "http response",
-        "z": "2131b817f896fa4e",
+        "z": "3f73e11d2319b810",
         "name": "HTTP Response",
         "statusCode": "200",
         "headers": {
             "content-type": "application/json"
         },
-        "x": 1560,
-        "y": 360,
+        "x": 1160,
+        "y": 160,
         "wires": []
     },
     {
-        "id": "ff6d71ff.74e5b",
-        "type": "http in",
-        "z": "2131b817f896fa4e",
-        "name": "HTTP Input \"POST\"",
-        "url": "/api/qtserver/*",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 130,
-        "y": 220,
-        "wires": [
-            [
-                "1d9e4863.23e26f"
-            ]
-        ]
+        "id": "5de82380e060a0f1",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 60,
+        "wires": []
     },
     {
-        "id": "1d9e4863.23e26f",
+        "id": "47f9116caac810b1",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e5162dd75671bedc",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "711b25830be06d33",
         "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Parse Request",
-        "func": "var parts = msg.req.url.split(\"/\");\nvar endpoint = parts[3];\nvar requestData = msg.payload;\n\n// Input validation\nswitch (endpoint) {\n    case \"checkCredentials\":\n        if (!requestData.username || !requestData.password) {\n            return { error: \"Username and password are required\" };\n        }\n        break;\n    case \"getAccountNumberByUsername\":\n        if (!requestData.username) {\n            return { error: \"Username is required\" };\n        }\n        break;\n    case \"getAccountBalanceByNumber\":\n        if (!requestData.accountNumber) {\n            return { error: \"Account number is required\" };\n        }\n        break;\n    case \"getTransactionHistoryByNumber\":\n        if (!requestData.accountNumber) {\n            return { error: \"Account number is required\" };\n        }\n        break;\n    case \"makeTransaction\":\n        if (!requestData.accountNumber || !requestData.amount) {\n            return { error: \"Account number and amount are required\" };\n        }\n        break;\n    case \"makeTransfer\":\n        if (!requestData.from_account_number || !requestData.to_account_number || !requestData.transfer_amount) {\n            return { error: \"From account number, to account number, and transfer amount are required\" };\n        }\n        break;\n    case \"getBankDatabase\":\n        // No specific validation required for this endpoint\n        break;\n    case \"createNewUser\":\n        if (!requestData.username || !requestData.password || !requestData.fullname || !requestData.age) {\n            return { error: \"Username, password, fullname, and age are required for creating a new user\" };\n        }\n        break;\n    case \"deleteUser\":\n        if (!requestData.username) {\n            return { error: \"Username is required\" };\n        }\n        break;\n    case \"updateUser\":\n        if (!requestData.username || !requestData.password || !requestData.fullname || !requestData.age) {\n            return { error: \"Username, password, fullname, and age are required for updating a user\" };\n        }\n        break;\n    case \"checkAdminPrivileges\":\n        if (!requestData.username) {\n            return { error: \"Username is required\" };\n        }\n        break;\n    default:\n        return { error: \"Invalid endpoint\" };\n}\n\n// If all validation passes, return the endpoint and requestData\nreturn { endpoint: endpoint, requestData: requestData };\n",
+        "z": "3f73e11d2319b810",
+        "name": "Format Response",
+        "func": "var isAuthenticated = msg.payload.length > 0;\nvar role = isAuthenticated ? msg.payload[0].role : '';\n\nvar response = {\n    authenticated: isAuthenticated,\n    role: role\n};\n\nmsg.payload = response;\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 340,
-        "y": 360,
+        "x": 890,
+        "y": 160,
         "wires": [
             [
-                "6773f804.8a78fc",
-                "f3da45df01a717be"
+                "588854ebd38cd6a1",
+                "8b5c864aac232321"
             ]
         ]
     },
     {
-        "id": "6773f804.8a78fc",
+        "id": "8b5c864aac232321",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "adb888e6a5b0b924",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Get Account Balance",
+        "url": "/getBalance",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 600,
+        "wires": [
+            [
+                "8c5928f57c609dd7",
+                "589d111158d35f5b"
+            ]
+        ]
+    },
+    {
+        "id": "8c5928f57c609dd7",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Get Balance",
+        "func": "var accountNumber = msg.payload.account_number;\n\n// Construct SQL query\nmsg.topic = `SELECT balance FROM user WHERE account_number='${accountNumber}'`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 600,
+        "wires": [
+            [
+                "1e8d7961343d7869",
+                "e0fbb6a39c42e025"
+            ]
+        ]
+    },
+    {
+        "id": "1e8d7961343d7869",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 650,
+        "y": 600,
+        "wires": [
+            [
+                "d173a4402cec446e",
+                "7ff513690ec05316"
+            ]
+        ]
+    },
+    {
+        "id": "d173a4402cec446e",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Format Balance Response",
+        "func": "var success = msg.payload.length > 0;\nvar balance = success ? msg.payload[0].balance : 0;\n\nvar response = {\n    success: success,\n    balance: balance\n};\n\nmsg.payload = response;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 600,
+        "wires": [
+            [
+                "4722e297a5cbde9f",
+                "23d0ad56ba570fd8"
+            ]
+        ]
+    },
+    {
+        "id": "4722e297a5cbde9f",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1200,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "589d111158d35f5b",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 20",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "e0fbb6a39c42e025",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 21",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "7ff513690ec05316",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "23d0ad56ba570fd8",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "bd50baf70ef344bc",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Get Transaction History",
+        "url": "/getTransactionHistory",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 940,
+        "wires": [
+            [
+                "985f9ed3b20920ee",
+                "9b826b8ecffc5e11",
+                "c0c96f95676f5599"
+            ]
+        ]
+    },
+    {
+        "id": "985f9ed3b20920ee",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Prepare SQL Query",
+        "func": "var accountNumber = msg.payload.account_number;\nvar count = msg.payload.count || 10;\nmsg.topic = `SELECT transaction_time, transaction_amount FROM transaction_history WHERE account_number='${accountNumber}' ORDER BY transaction_time DESC LIMIT ${count}`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 940,
+        "wires": [
+            [
+                "9b826b8ecffc5e11",
+                "1581de6b8da49106"
+            ]
+        ]
+    },
+    {
+        "id": "9b826b8ecffc5e11",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 680,
+        "y": 940,
+        "wires": [
+            [
+                "83b670ba0fa2682b",
+                "d5604c39e08c488c"
+            ]
+        ]
+    },
+    {
+        "id": "83b670ba0fa2682b",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Format Response",
+        "func": "var response = msg.payload.map(item => ({\n    transaction_time: item.transaction_time,\n    transaction_amount: item.transaction_amount\n}));\nmsg.payload = response;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 940,
+        "wires": [
+            [
+                "829700727081b96b",
+                "68915dc91a22afdf"
+            ]
+        ]
+    },
+    {
+        "id": "829700727081b96b",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 1200,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "c0c96f95676f5599",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 28",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "1581de6b8da49106",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 29",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "d5604c39e08c488c",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 30",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 900,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "68915dc91a22afdf",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 31",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1180,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "6a352661e68cb087",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Make Transaction",
+        "url": "/makeTransaction",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 170,
+        "y": 1320,
+        "wires": [
+            [
+                "3afb994f3b1f9017",
+                "174ada487be40b28"
+            ]
+        ]
+    },
+    {
+        "id": "3afb994f3b1f9017",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Check Account and Balance",
+        "func": "var accountNumber = msg.payload.accountNumber;\nvar amount = msg.payload.amount;\n\n// Construct SQL query to check balance\nmsg.topic = `SELECT balance FROM user WHERE account_number='${accountNumber}'`;\nmsg.accountNumber = accountNumber;\nmsg.amount = amount;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 1320,
+        "wires": [
+            [
+                "07209cd07847ef74",
+                "0fbf4f78660d3805"
+            ]
+        ]
+    },
+    {
+        "id": "07209cd07847ef74",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 740,
+        "y": 1320,
+        "wires": [
+            [
+                "24e463801ab89120",
+                "177e617a580187a6"
+            ]
+        ]
+    },
+    {
+        "id": "24e463801ab89120",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Verify Balance",
+        "func": "var balance = msg.payload[0].balance;\nvar amount = msg.amount;\n\nif (balance >= amount) {\n    msg.topic = `UPDATE user SET balance = balance - ${amount} WHERE account_number='${msg.accountNumber}';`;\n    return msg;\n} else {\n    var response = {\n        success: false,\n        error: 'Insufficient balance'\n    };\n    msg.payload = response;\n    msg.headers = {'content-type': 'application/json'};\n    msg.statusCode = 400;\n    return [null, msg];\n}",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 1320,
+        "wires": [
+            [
+                "801c269d3cc6ea04",
+                "1c72d80279f86276"
+            ],
+            [
+                "0657a1091d52a2ca"
+            ]
+        ]
+    },
+    {
+        "id": "801c269d3cc6ea04",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 1260,
+        "y": 1320,
+        "wires": [
+            [
+                "4bb201260e073950",
+                "d12845bc3da4c986"
+            ]
+        ]
+    },
+    {
+        "id": "4bb201260e073950",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Insert Transaction",
+        "func": "var accountNumber = msg.accountNumber;\nvar amount = msg.amount;\n\nmsg.topic = `INSERT INTO transaction_history (account_number, transaction_time, transaction_amount) VALUES ('${accountNumber}', NOW(), -${amount})`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1530,
+        "y": 1320,
+        "wires": [
+            [
+                "f22c4299b2076eeb",
+                "0a02878434b0d00a"
+            ]
+        ]
+    },
+    {
+        "id": "f22c4299b2076eeb",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 1580,
+        "y": 1520,
+        "wires": [
+            [
+                "f684d50675842246",
+                "0e9c19cdc6bdf998"
+            ]
+        ]
+    },
+    {
+        "id": "f684d50675842246",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Format Response",
+        "func": "msg.payload = {\n    success: true\n};\nmsg.headers = {'content-type': 'application/json'};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1090,
+        "y": 1520,
+        "wires": [
+            [
+                "0657a1091d52a2ca",
+                "2cf6a8955da06160"
+            ]
+        ]
+    },
+    {
+        "id": "0657a1091d52a2ca",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 1160,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "174ada487be40b28",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 40",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "0fbf4f78660d3805",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 41",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "177e617a580187a6",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 42",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "1c72d80279f86276",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 43",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1240,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "d12845bc3da4c986",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 44",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1500,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "0e9c19cdc6bdf998",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 45",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1760,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "2cf6a8955da06160",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 46",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1340,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "0a02878434b0d00a",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 47",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1740,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "e066aaccc6b4160c",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Make Transfer",
+        "url": "/makeTransfer",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 1800,
+        "wires": [
+            [
+                "f715557c12c28c1e",
+                "dbca81b6b7bd524b"
+            ]
+        ]
+    },
+    {
+        "id": "f715557c12c28c1e",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Check From Account and Balance",
+        "func": "var fromAccountNumber = msg.payload.fromAccountNumber;\nvar toAccountNumber = msg.payload.toAccountNumber;\nvar amount = msg.payload.amount;\n\n// Construct SQL query to check balance\nmsg.topic = `SELECT balance FROM user WHERE account_number='${fromAccountNumber}'`;\nmsg.fromAccountNumber = fromAccountNumber;\nmsg.toAccountNumber = toAccountNumber;\nmsg.amount = amount;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 1800,
+        "wires": [
+            [
+                "4f45d213d3afcf35",
+                "edeb065ef2a07013"
+            ]
+        ]
+    },
+    {
+        "id": "4f45d213d3afcf35",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 700,
+        "y": 1800,
+        "wires": [
+            [
+                "21b45defa1102b1a",
+                "3901467b0a78d721"
+            ]
+        ]
+    },
+    {
+        "id": "21b45defa1102b1a",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Verify From Balance",
+        "func": "var balance = msg.payload[0].balance;\nvar amount = msg.amount;\n\nif (balance >= amount) {\n    msg.topic = `UPDATE user SET balance = balance - ${amount} WHERE account_number='${msg.fromAccountNumber}';`;\n    return msg;\n} else {\n    var response = {\n        success: false,\n        error: 'Insufficient balance'\n    };\n    msg.payload = response;\n    msg.headers = {'content-type': 'application/json'};\n    msg.statusCode = 400;\n    return [null, msg];\n}",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 1800,
+        "wires": [
+            [
+                "fb66e2f9fe1ba0ec",
+                "db8a6fa43ad1b2ca"
+            ],
+            [
+                "591038c3b5a0fadd",
+                "5a81c174a2114da8"
+            ]
+        ]
+    },
+    {
+        "id": "fb66e2f9fe1ba0ec",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 1220,
+        "y": 1800,
+        "wires": [
+            [
+                "aff017149164458a",
+                "9ac9b1c564b51b46"
+            ]
+        ]
+    },
+    {
+        "id": "aff017149164458a",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Check To Account",
+        "func": "var toAccountNumber = msg.toAccountNumber;\n\n// Construct SQL query to check existence of the to account\nmsg.topic = `SELECT COUNT(*) as count FROM user WHERE account_number='${toAccountNumber}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1470,
+        "y": 1800,
+        "wires": [
+            [
+                "9541b49747a3afdc",
+                "c3c564b79e0d6856"
+            ]
+        ]
+    },
+    {
+        "id": "9541b49747a3afdc",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 1700,
+        "y": 1800,
+        "wires": [
+            [
+                "c8cb6acca8facdf5",
+                "69801032295cb5a5"
+            ]
+        ]
+    },
+    {
+        "id": "c8cb6acca8facdf5",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Verify To Account",
+        "func": "var count = msg.payload[0].count;\n\nif (count == 1) {\n    var amount = msg.amount;\n    var toAccountNumber = msg.toAccountNumber;\n    msg.topic = `UPDATE user SET balance = balance + ${amount} WHERE account_number='${toAccountNumber}';`;\n    return msg;\n} else {\n    var response = {\n        success: false,\n        error: 'Invalid destination account number'\n    };\n    msg.payload = response;\n    msg.headers = {'content-type': 'application/json'};\n    msg.statusCode = 400;\n    return [null, msg];\n}",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 2080,
+        "wires": [
+            [
+                "55130962aa95f3f9",
+                "ecba55b9487135ae"
+            ],
+            [
+                "591038c3b5a0fadd",
+                "a1565db1bd2fa1e2"
+            ]
+        ]
+    },
+    {
+        "id": "55130962aa95f3f9",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 2000,
+        "y": 1820,
+        "wires": [
+            [
+                "fabaf041ed921d79",
+                "a3af3bddc72e8257"
+            ]
+        ]
+    },
+    {
+        "id": "fabaf041ed921d79",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Insert Transfer Transaction",
+        "func": "var fromAccountNumber = msg.fromAccountNumber;\nvar toAccountNumber = msg.toAccountNumber;\nvar amount = msg.amount;\n\nmsg.topic = `INSERT INTO transaction_history (account_number, transaction_time, transaction_amount) VALUES ('${fromAccountNumber}', NOW(), -${amount}), ('${toAccountNumber}', NOW(), ${amount})`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1900,
+        "y": 1960,
+        "wires": [
+            [
+                "d540fad176479c8a",
+                "bf4afd9886ac7603"
+            ]
+        ]
+    },
+    {
+        "id": "d540fad176479c8a",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 1860,
+        "y": 2060,
+        "wires": [
+            [
+                "6f95b8d653e1a0af",
+                "0f602cbedcf4b952"
+            ]
+        ]
+    },
+    {
+        "id": "6f95b8d653e1a0af",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Format Transfer Response",
+        "func": "msg.payload = {\n    success: true\n};\nmsg.headers = {'content-type': 'application/json'};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1900,
+        "y": 2180,
+        "wires": [
+            [
+                "591038c3b5a0fadd",
+                "fefdfb0a2c0dd55b"
+            ]
+        ]
+    },
+    {
+        "id": "591038c3b5a0fadd",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 960,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "dbca81b6b7bd524b",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 48",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 340,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "edeb065ef2a07013",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 49",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "3901467b0a78d721",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 50",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "db8a6fa43ad1b2ca",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 51",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "9ac9b1c564b51b46",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 52",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1460,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "69801032295cb5a5",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 53",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1920,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "a3af3bddc72e8257",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 54",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2140,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "0f602cbedcf4b952",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 55",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2140,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "fefdfb0a2c0dd55b",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 56",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2140,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "c3c564b79e0d6856",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 57",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1680,
+        "y": 1660,
+        "wires": []
+    },
+    {
+        "id": "a1565db1bd2fa1e2",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 58",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 2120,
+        "wires": []
+    },
+    {
+        "id": "bf4afd9886ac7603",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 59",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2140,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "ecba55b9487135ae",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 60",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1600,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "5a81c174a2114da8",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 61",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "959db7dc701cee0d",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Update User",
+        "url": "/updateUser",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1750,
+        "y": 960,
+        "wires": [
+            [
+                "97c3f4d8d4247a77",
+                "f9ee893fa1265fc3"
+            ]
+        ]
+    },
+    {
+        "id": "97c3f4d8d4247a77",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Update User Details",
+        "func": "var username = msg.payload.username;\nvar fullname = msg.payload.fullname;\nvar age = msg.payload.age;\n\n// Construct SQL query\nmsg.topic = `UPDATE user SET fullname='${fullname}', age=${age} WHERE username='${username}'`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2180,
+        "y": 840,
+        "wires": [
+            [
+                "f9ee893fa1265fc3",
+                "cd47b53c90834317"
+            ]
+        ]
+    },
+    {
+        "id": "f9ee893fa1265fc3",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 2140,
+        "y": 1100,
+        "wires": [
+            [
+                "6b73a4853397cc76",
+                "cd47b53c90834317"
+            ]
+        ]
+    },
+    {
+        "id": "6b73a4853397cc76",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Format Update Response",
+        "func": "var updateSuccess = msg.payload.affectedRows > 0;\n\nvar response = {\n    updated: updateSuccess\n};\n\nmsg.payload = response;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2450,
+        "y": 1120,
+        "wires": [
+            [
+                "6e7cc1596afe076f",
+                "e0fe4d1bc20a5599"
+            ]
+        ]
+    },
+    {
+        "id": "6e7cc1596afe076f",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 2840,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "cd47b53c90834317",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "Debug Update User",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 2600,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "e0fe4d1bc20a5599",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "Debug Update Response",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "x": 2850,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "02c4670c3831c9e4",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Verify Account Number",
+        "func": "// Check if any rows were returned\nif (msg.payload.length > 0) {\n    // Extract the account number from the first row\n    var accountNumber = msg.payload[0].account_number;\n\n    // Prepare the response object\n    msg.payload = {\n        success: true,\n        account_number: accountNumber\n    };\n} else {\n    // Account number not found\n    msg.payload = {\n        success: false,\n        error: \"Account number not found for the given username.\"\n    };\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 400,
+        "wires": [
+            [
+                "aadbb7d9977f30b1",
+                "35ee0a82faba2a8a"
+            ]
+        ]
+    },
+    {
+        "id": "770911d59946d754",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Get Account Number by Username",
+        "url": "/getAccountNumberByUsername",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 400,
+        "wires": [
+            [
+                "d8d4a6c69092b318",
+                "29d0646cc97960dc"
+            ]
+        ]
+    },
+    {
+        "id": "d8d4a6c69092b318",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Check Username",
+        "func": "var username = msg.payload.username;\n\n// Construct SQL query to retrieve the account number\nmsg.topic = \"SELECT account_number FROM user WHERE username='\" + username + \"'\";\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 400,
+        "wires": [
+            [
+                "38f6d69016567cfb",
+                "83c4559531d67430"
+            ]
+        ]
+    },
+    {
+        "id": "38f6d69016567cfb",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 770,
+        "y": 400,
+        "wires": [
+            [
+                "02c4670c3831c9e4",
+                "50fac3dfd8259f41"
+            ]
+        ]
+    },
+    {
+        "id": "aadbb7d9977f30b1",
         "type": "switch",
-        "z": "2131b817f896fa4e",
-        "name": "Route Requests",
-        "property": "endpoint",
+        "z": "3f73e11d2319b810",
+        "name": "Filter Success",
+        "property": "payload.success",
         "propertyType": "msg",
         "rules": [
             {
-                "t": "eq",
-                "v": "checkCredentials",
-                "vt": "str"
+                "t": "true"
             },
             {
-                "t": "eq",
-                "v": "getAccountNumberByUsername",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "getAccountBalanceByNumber",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "getTransactionHistoryByNumber",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "makeTransaction",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "makeTransfer",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "getBankDatabase",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "createNewUser",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "deleteUser",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "updateUser",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "checkAdminPrivileges",
-                "vt": "str"
+                "t": "false"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 11,
-        "x": 620,
-        "y": 360,
-        "wires": [
-            [
-                "a495ff0c.86b9c8"
-            ],
-            [
-                "d2204238.2c3fb8"
-            ],
-            [
-                "fb44ab30.7deaf8"
-            ],
-            [
-                "275d6466.85d65c"
-            ],
-            [
-                "c8fd47f8.f16a5"
-            ],
-            [
-                "b92423d0.a7a318"
-            ],
-            [
-                "6dcd8160.87dd78"
-            ],
-            [
-                "2f0e0ef6.0ccf14"
-            ],
-            [
-                "2b4c1dfb947ef70b"
-            ],
-            [
-                "e5722f06b1af99bb"
-            ],
-            [
-                "86e2479a0a9f36d0"
-            ]
-        ]
-    },
-    {
-        "id": "a495ff0c.86b9c8",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Check Credentials",
-        "func": "var username = msg.requestData.username;\nvar password = msg.requestData.password;\n\nvar query = \"SELECT role FROM user WHERE username = ? AND password = ?\";\n\n// Execute the query\ncontext.global.mysql.query(query, [username, password], function(error, results, fields) {\n    if (error) {\n        console.error('Error checking credentials:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while checking credentials' };\n        node.send(msg);\n    } else {\n        // Check if the credentials are valid\n        if (results.length > 0) {\n            var role = results[0].role;\n            msg.payload = { isAuthenticated: true, role: role };\n            node.send(msg);\n        } else {\n            console.error('Invalid username or password');\n            msg.statusCode = 401; // Unauthorized\n            msg.payload = { error: 'Invalid username or password' };\n            node.send(msg);\n        }\n    }\n});\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 890,
-        "y": 40,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "d2204238.2c3fb8",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Get Account Number",
-        "func": "var query = \"SELECT account_number FROM user WHERE username = ?\";\n\n// Execute the query\ncontext.global.mysql.query(query, [username], function(error, results, fields) {\n    if (error) {\n        console.error('Error retrieving account number:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while retrieving account number' };\n        node.send(msg);\n    } else {\n        // Check if the username exists\n        if (results.length > 0) {\n            var accountNumber = results[0].account_number;\n            msg.payload = { accountNumber: accountNumber };\n            node.send(msg);\n        } else {\n            console.error('Username not found');\n            msg.statusCode = 404; // Not Found\n            msg.payload = { error: 'Username not found' };\n            node.send(msg);\n        }\n    }\n});",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 900,
-        "y": 100,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "fb44ab30.7deaf8",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Get Account Balance",
-        "func": "var accountNumber = msg.requestData.accountNumber;\n\n// Your code for getting account balance by number here\nvar query = \"SELECT balance FROM user WHERE account_number = ?\";\n\n// Execute the query\ncontext.global.mysql.query(query, [accountNumber], function(error, results, fields) {\n    if (error) {\n        console.error('Error getting account balance:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while getting account balance' };\n        node.send(msg);\n    } else {\n        // Check if the account balance is found\n        if (results.length > 0) {\n            var balance = results[0].balance;\n            msg.payload = { balance: balance };\n            node.send(msg);\n        } else {\n            console.error('Account number not found:', accountNumber);\n            msg.statusCode = 404; // Not Found\n            msg.payload = { error: 'Account number not found' };\n            node.send(msg);\n        }\n    }\n});\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 900,
-        "y": 160,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "275d6466.85d65c",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Get Transaction History",
-        "func": "var accountNumber = msg.requestData.accountNumber;\nvar count = msg.requestData.count;\n\n// Your code for getting transaction history by number here\nvar query = \"SELECT transaction_time, transaction_amount FROM transaction_history WHERE account_number = ? ORDER BY transaction_time DESC LIMIT ?\";\n\n// Execute the query\ncontext.global.mysql.query(query, [accountNumber, count], function(error, results, fields) {\n    if (error) {\n        console.error('Error getting transaction history:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while getting transaction history' };\n        node.send(msg);\n    } else {\n        // Check if any transactions are found\n        if (results.length > 0) {\n            var history = results.map(function(transaction) {\n                return `${transaction.transaction_time}: $${transaction.transaction_amount}`;\n            });\n            msg.payload = { history: history.join('\\n') };\n            node.send(msg);\n        } else {\n            console.error('No transaction history found for account number:', accountNumber);\n            msg.statusCode = 404; // Not Found\n            msg.payload = { error: 'No transaction history found' };\n            node.send(msg);\n        }\n    }\n});\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 910,
-        "y": 220,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "c8fd47f8.f16a5",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Make Transaction",
-        "func": "var accountNumber = msg.requestData.accountNumber;\nvar amount = msg.requestData.amount;\n\n// Your code for making transaction here\nvar query = \"UPDATE user SET balance = balance - ? WHERE account_number = ?\";\n\n// Execute the query to deduct the amount from the account balance\ncontext.global.mysql.query(query, [amount, accountNumber], function(error, results, fields) {\n    if (error) {\n        console.error('Error deducting amount from account balance:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while making the transaction' };\n        node.send(msg);\n    } else {\n        if (results.affectedRows === 0) {\n            console.error('No user found with account number:', accountNumber);\n            msg.statusCode = 404; // Not Found\n            msg.payload = { error: 'Account number not found' };\n            node.send(msg);\n        } else {\n            // Insert transaction history\n            var insertQuery = \"INSERT INTO transaction_history (account_number, transaction_time, transaction_amount) VALUES (?, NOW(), ?)\";\n            context.global.mysql.query(insertQuery, [accountNumber, -amount], function(error, results, fields) {\n                if (error) {\n                    console.error('Error inserting transaction history:', error);\n                    msg.statusCode = 500; // Internal Server Error\n                    msg.payload = { error: 'An error occurred while making the transaction' };\n                    node.send(msg);\n                } else {\n                    msg.payload = { success: true };\n                    node.send(msg);\n                }\n            });\n        }\n    }\n});\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 890,
-        "y": 280,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "b92423d0.a7a318",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Make Transfer",
-        "func": "var from_account_number = msg.requestData.from_account_number;\nvar to_account_number = msg.requestData.to_account_number;\nvar transfer_amount = msg.requestData.transfer_amount;\n\n// Check if the source account exists and has enough balance\nvar checkBalanceQuery = \"SELECT balance FROM user WHERE account_number = ?\";\ncontext.global.mysql.query(checkBalanceQuery, [from_account_number], function(error, results, fields) {\n    if (error) {\n        console.error('Error checking balance for source account:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while making the transfer' };\n        node.send(msg);\n    } else {\n        if (results.length === 0) {\n            console.error('Source account does not exist:', from_account_number);\n            msg.statusCode = 404; // Not Found\n            msg.payload = { error: 'Source account does not exist' };\n            node.send(msg);\n        } else {\n            var from_balance = results[0].balance;\n            if (from_balance < transfer_amount) {\n                console.error('Insufficient funds in source account:', from_account_number);\n                msg.statusCode = 400; // Bad Request\n                msg.payload = { error: 'Insufficient funds' };\n                node.send(msg);\n            } else {\n                // Deduct from source account\n                var updateFromAccountQuery = \"UPDATE user SET balance = balance - ? WHERE account_number = ?\";\n                context.global.mysql.query(updateFromAccountQuery, [transfer_amount, from_account_number], function(error, results, fields) {\n                    if (error) {\n                        console.error('Error deducting amount from source account:', error);\n                        msg.statusCode = 500; // Internal Server Error\n                        msg.payload = { error: 'An error occurred while making the transfer' };\n                        node.send(msg);\n                    } else {\n                        // Add to destination account\n                        var updateToAccountQuery = \"UPDATE user SET balance = balance + ? WHERE account_number = ?\";\n                        context.global.mysql.query(updateToAccountQuery, [transfer_amount, to_account_number], function(error, results, fields) {\n                            if (error) {\n                                console.error('Error adding amount to destination account:', error);\n                                msg.statusCode = 500; // Internal Server Error\n                                msg.payload = { error: 'An error occurred while making the transfer' };\n                                node.send(msg);\n                            } else {\n                                // Insert transaction history for source account\n                                var insertTransactionQuery = \"INSERT INTO transaction_history (account_number, transaction_time, transaction_amount) VALUES (?, NOW(), ?)\";\n                                context.global.mysql.query(insertTransactionQuery, [from_account_number, -transfer_amount], function(error, results, fields) {\n                                    if (error) {\n                                        console.error('Error inserting transaction history for source account:', error);\n                                        msg.statusCode = 500; // Internal Server Error\n                                        msg.payload = { error: 'An error occurred while making the transfer' };\n                                        node.send(msg);\n                                    } else {\n                                        // Insert transaction history for destination account\n                                        context.global.mysql.query(insertTransactionQuery, [to_account_number, transfer_amount], function(error, results, fields) {\n                                            if (error) {\n                                                console.error('Error inserting transaction history for destination account:', error);\n                                                msg.statusCode = 500; // Internal Server Error\n                                                msg.payload = { error: 'An error occurred while making the transfer' };\n                                                node.send(msg);\n                                            } else {\n                                                msg.payload = { success: true };\n                                                node.send(msg);\n                                            }\n                                        });\n                                    }\n                                });\n                            }\n                        });\n                    }\n                });\n            }\n        }\n    }\n});\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 340,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "6dcd8160.87dd78",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Get Bank Database",
-        "func": "// Your code for getting the bank database here\nvar getBankDatabaseQuery = \"SELECT * FROM user\";\n\ncontext.global.mysql.query(getBankDatabaseQuery, function(error, results, fields) {\n    if (error) {\n        console.error('Error retrieving bank database:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while retrieving bank database' };\n        node.send(msg);\n    } else {\n        msg.payload = { bankDatabase: results };\n        node.send(msg);\n    }\n});\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 890,
+        "outputs": 2,
+        "x": 1220,
         "y": 400,
         "wires": [
             [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "2f0e0ef6.0ccf14",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Create New User",
-        "func": "var username = msg.requestData.username;\nvar password = msg.requestData.password;\nvar fullname = msg.requestData.fullname;\nvar age = msg.requestData.age;\n\n// Your code for creating a new user here\nvar createUserQuery = `INSERT INTO user (username, password, fullname, age) VALUES (?, ?, ?, ?)`;\nvar createUserValues = [username, password, fullname, age];\n\ncontext.global.mysql.query(createUserQuery, createUserValues, function(error, results, fields) {\n    if (error) {\n        console.error('Error creating new user:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while creating a new user' };\n        node.send(msg);\n    } else {\n        msg.payload = { success: true };\n        node.send(msg);\n    }\n});\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 890,
-        "y": 460,
-        "wires": [
+                "c37aa8f5177efd0e",
+                "d1e70cdf298d8f99"
+            ],
             [
-                "b1ebbc44c8086068"
+                "52d39c34e4ffe106",
+                "4b9e09762f6d8a9c"
             ]
         ]
     },
     {
-        "id": "2b4c1dfb947ef70b",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Delete User",
-        "func": "var username = msg.requestData.username;\n\n// Your code for deleting a user here\nvar deleteUserQuery = `DELETE FROM user WHERE username = ?`;\nvar deleteUserValues = [username];\n\ncontext.global.mysql.query(deleteUserQuery, deleteUserValues, function(error, results, fields) {\n    if (error) {\n        console.error('Error deleting user:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while deleting the user' };\n        node.send(msg);\n    } else {\n        // Check if any rows were affected\n        if (results.affectedRows === 0) {\n            msg.statusCode = 404; // Not Found\n            msg.payload = { error: 'User not found' };\n            node.send(msg);\n        } else {\n            msg.payload = { success: true };\n            node.send(msg);\n        }\n    }\n});\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 520,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "e5722f06b1af99bb",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Update User",
-        "func": "var username = msg.requestData.username;\nvar password = msg.requestData.password;\nvar fullname = msg.requestData.fullname;\nvar age = msg.requestData.age;\n\n// Your code for updating a user here\nvar updateUserQuery = `UPDATE user SET password = ?, fullname = ?, age = ? WHERE username = ?`;\nvar updateUserValues = [password, fullname, age, username];\n\ncontext.global.mysql.query(updateUserQuery, updateUserValues, function(error, results, fields) {\n    if (error) {\n        console.error('Error updating user:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while updating the user' };\n        node.send(msg);\n    } else {\n        // Check if any rows were affected\n        if (results.affectedRows === 0) {\n            msg.statusCode = 404; // Not Found\n            msg.payload = { error: 'User not found' };\n            node.send(msg);\n        } else {\n            msg.payload = { success: true };\n            node.send(msg);\n        }\n    }\n});\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 870,
-        "y": 580,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "86e2479a0a9f36d0",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Check Admin Privileges",
-        "func": "var username = msg.requestData.username;\n\n// Your code for checking admin privileges here\nvar checkAdminQuery = `SELECT role FROM user WHERE username = ?`;\nvar checkAdminValues = [username];\n\ncontext.global.mysql.query(checkAdminQuery, checkAdminValues, function(error, results, fields) {\n    if (error) {\n        console.error('Error checking admin privileges:', error);\n        msg.statusCode = 500; // Internal Server Error\n        msg.payload = { error: 'An error occurred while checking admin privileges' };\n        node.send(msg);\n    } else {\n        if (results.length === 0) {\n            msg.statusCode = 404; // Not Found\n            msg.payload = { error: 'User not found' };\n            node.send(msg);\n        } else {\n            var isAdmin = results[0].role === 'admin';\n            msg.payload = { isAdmin: isAdmin };\n            node.send(msg);\n        }\n    }\n});\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 910,
-        "y": 640,
-        "wires": [
-            [
-                "b1ebbc44c8086068"
-            ]
-        ]
-    },
-    {
-        "id": "b1ebbc44c8086068",
-        "type": "mysql",
-        "z": "2131b817f896fa4e",
-        "mydb": "c9d4197e92e2efe6",
-        "name": "MySQL",
-        "x": 1240,
-        "y": 360,
-        "wires": [
-            [
-                "41fcb1de.41a6e8",
-                "0cc8e0637f693f96"
-            ]
-        ]
-    },
-    {
-        "id": "f3da45df01a717be",
-        "type": "debug",
-        "z": "2131b817f896fa4e",
-        "name": "Debug Parsed Request",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 570,
-        "y": 520,
+        "id": "d1e70cdf298d8f99",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1480,
+        "y": 340,
         "wires": []
     },
     {
-        "id": "0cc8e0637f693f96",
-        "type": "debug",
-        "z": "2131b817f896fa4e",
-        "name": "Debug Response",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1570,
-        "y": 180,
+        "id": "4b9e09762f6d8a9c",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Error Response",
+        "statusCode": "404",
+        "headers": {},
+        "x": 1500,
+        "y": 440,
         "wires": []
     },
     {
-        "id": "eacc1477fb0b2e79",
-        "type": "inject",
-        "z": "2131b817f896fa4e",
-        "name": "Inject",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "str",
-        "x": 110,
-        "y": 640,
-        "wires": [
-            [
-                "8758cb7a05bb356f"
-            ]
-        ]
-    },
-    {
-        "id": "8758cb7a05bb356f",
-        "type": "file in",
-        "z": "2131b817f896fa4e",
-        "name": "Read JSON File",
-        "filename": "C:\\Users\\Mostafa Ashraf\\.node-red\\users.json",
-        "filenameType": "str",
-        "format": "utf8",
-        "chunk": false,
-        "sendError": false,
-        "encoding": "utf8",
-        "allProps": false,
-        "x": 340,
-        "y": 660,
-        "wires": [
-            [
-                "6e17ef89102ed0f8",
-                "b1c193cf7b764128"
-            ]
-        ]
-    },
-    {
-        "id": "b1c193cf7b764128",
+        "id": "29d0646cc97960dc",
         "type": "debug",
-        "z": "2131b817f896fa4e",
-        "name": "Read JSON File",
+        "z": "3f73e11d2319b810",
+        "name": "debug 71",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 620,
-        "y": 800,
+        "x": 500,
+        "y": 300,
         "wires": []
     },
     {
-        "id": "6e17ef89102ed0f8",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Parses Incoming JSON Payload",
-        "func": "var jsonData = JSON.parse(msg.payload);\nmsg.payload = jsonData;\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 670,
-        "y": 720,
-        "wires": [
-            [
-                "283df797119e06ae",
-                "e1455b7cad7d2d98"
-            ]
-        ]
-    },
-    {
-        "id": "283df797119e06ae",
+        "id": "83c4559531d67430",
         "type": "debug",
-        "z": "2131b817f896fa4e",
-        "name": "Debug Parsed Incoming JSON Payload",
+        "z": "3f73e11d2319b810",
+        "name": "debug 72",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1080,
-        "y": 800,
+        "x": 740,
+        "y": 300,
         "wires": []
     },
     {
-        "id": "e1455b7cad7d2d98",
-        "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Parse JSON Data",
-        "func": "// Assuming jsonData is an array containing the JSON data from the file\nvar jsonData = msg.payload; // Assuming the JSON data is passed as payload\n\n// Initialize an empty array to store individual insertion messages\nvar insertionMessages = [];\n\n// Loop through the JSON array\njsonData.forEach(function(item) {\n    // Extract relevant information from each JSON object for the 'user' table\n    var userInsertionQuery = `\n        INSERT INTO user \n        (username, password, account_number, fullname, balance, age, role) \n        VALUES \n        ('${item.username}', '${item.password}', '${item.account_number}', '${item.fullname}', ${item.balance}, ${item.age}, '${item.role}')\n    `;\n\n    // Create a message object with the insertion query for the 'user' table\n    var userInsertionMessage = {\n        topic: \"MySQL Insertion\", // Topic for routing to the MySQL node\n        payload: userInsertionQuery // MySQL query to be executed\n    };\n\n    // Push the message object into the array\n    insertionMessages.push(userInsertionMessage);\n\n    // Construct insertion message for the 'transaction_history' table\n    var transactionHistoryInsertionQuery = `\n        INSERT INTO transaction_history \n        (account_number, transaction_time, transaction_amount) \n        VALUES \n        ('${item.account_number}', NOW(), ${item.balance})\n    `;\n\n    // Create a message object with the insertion query for the 'transaction_history' table\n    var transactionHistoryInsertionMessage = {\n        topic: \"MySQL Insertion\", // Topic for routing to the MySQL node\n        payload: transactionHistoryInsertionQuery // MySQL query to be executed\n    };\n\n    // Push the message object into the array\n    insertionMessages.push(transactionHistoryInsertionMessage);\n});\n\n// Now insertionMessages array contains individual insertion messages for each data entry\n// You can use this array in your Node-RED flow to pass each insertion message to the MySQL node\nreturn insertionMessages;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1010,
-        "y": 740,
-        "wires": [
-            [
-                "8f99d54e9f019238",
-                "9a1d8e7633aae10f"
-            ]
-        ]
-    },
-    {
-        "id": "9a1d8e7633aae10f",
-        "type": "split",
-        "z": "2131b817f896fa4e",
-        "name": "Split JSON Array",
-        "splt": "\\n",
-        "spltType": "str",
-        "arraySplt": 1,
-        "arraySpltType": "len",
-        "stream": false,
-        "addname": "",
-        "x": 1250,
-        "y": 640,
-        "wires": [
-            [
-                "57c85da973bd5bae"
-            ]
-        ]
-    },
-    {
-        "id": "8f99d54e9f019238",
+        "id": "35ee0a82faba2a8a",
         "type": "debug",
-        "z": "2131b817f896fa4e",
-        "name": "Debug Parsed JSON Data",
+        "z": "3f73e11d2319b810",
+        "name": "debug 73",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c37aa8f5177efd0e",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 74",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
         "x": 1440,
-        "y": 740,
+        "y": 220,
         "wires": []
     },
     {
-        "id": "9278f62b9c15bd2e",
+        "id": "52d39c34e4ffe106",
         "type": "debug",
-        "z": "2131b817f896fa4e",
-        "name": "Debug Constructed SQL",
+        "z": "3f73e11d2319b810",
+        "name": "debug 75",
         "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
+        "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1590,
-        "y": 540,
+        "x": 1440,
+        "y": 560,
         "wires": []
     },
     {
-        "id": "57c85da973bd5bae",
+        "id": "50fac3dfd8259f41",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 103",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "1927a872be0b5144",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 99",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2020,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "12672c43f01793c9",
         "type": "function",
-        "z": "2131b817f896fa4e",
-        "name": "Construct SQL",
-        "func": "var item = msg.payload;\n\n// Construct SQL INSERT statement for the 'user' table\nvar userSql = `\n    INSERT INTO user (username, password, account_number, fullname, balance, age, role) \n    VALUES ('${item.username}', '${item.password}', '${item.account_number}', '${item.fullname}', ${item.balance}, ${item.age}, '${item.role}')\n`;\n\n// Construct SQL INSERT statement for the 'transaction_history' table\nvar transactionHistorySql = `\n    INSERT INTO transaction_history (account_number, transaction_time, transaction_amount) \n    VALUES ('${item.account_number}', NOW(), ${item.balance})\n`;\n\n// Construct a single string containing both SQL queries\nvar sqlQueries = userSql + ';' + transactionHistorySql;\n\n// Pass the concatenated SQL queries to the next node (MySQL node)\nreturn { payload: sqlQueries };\n",
+        "z": "3f73e11d2319b810",
+        "name": "Create User",
+        "func": "var username = msg.payload.username;\nvar password = msg.payload.password;\nvar account_number = msg.payload.account_number;\nvar fullname = msg.payload.fullname;\nvar balance = msg.payload.balance;\nvar age = msg.payload.age;\nvar role = msg.payload.role;\n\n// Construct SQL query\nmsg.topic = `INSERT INTO user (username, password, account_number, fullname, balance, age, role) VALUES ('${username}', '${password}', '${account_number}', '${fullname}', ${balance}, ${age}, '${role}')`;\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1240,
-        "y": 540,
+        "x": 2010,
+        "y": 200,
         "wires": [
             [
-                "9278f62b9c15bd2e",
-                "b1ebbc44c8086068"
+                "2727f551485c6853",
+                "53445067f0fcb0dc"
             ]
         ]
     },
     {
-        "id": "0eece3d72b4f84a3",
+        "id": "79f3c769022eeeba",
         "type": "http in",
-        "z": "2131b817f896fa4e",
-        "name": "HTTP Input \"GET\"",
-        "url": "/api/qtserver/*",
+        "z": "3f73e11d2319b810",
+        "name": "Create User",
+        "url": "/createUser",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1790,
+        "y": 200,
+        "wires": [
+            [
+                "12672c43f01793c9",
+                "1927a872be0b5144"
+            ]
+        ]
+    },
+    {
+        "id": "2727f551485c6853",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 2280,
+        "y": 200,
+        "wires": [
+            [
+                "e2fea1ab83cae917",
+                "ddd9de725c849bdc"
+            ]
+        ]
+    },
+    {
+        "id": "53445067f0fcb0dc",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 100",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2270,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "e2fea1ab83cae917",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Format Response",
+        "func": "var success = msg.payload.affectedRows > 0;\n\nvar response = {\n    success: success\n};\n\nmsg.payload = response;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2550,
+        "y": 200,
+        "wires": [
+            [
+                "4941f889b887b66b",
+                "d3a3f56bc1124be7"
+            ]
+        ]
+    },
+    {
+        "id": "ddd9de725c849bdc",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 101",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2530,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "4941f889b887b66b",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 2840,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d3a3f56bc1124be7",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 102",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2830,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "30c48e95a5d1279a",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Get Database",
+        "url": "/getDatabase",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 130,
-        "y": 520,
+        "x": 1790,
+        "y": 340,
         "wires": [
             [
-                "1d9e4863.23e26f"
+                "0362bcb55c780116",
+                "f42c9c86190f24e2"
             ]
         ]
     },
     {
-        "id": "c9d4197e92e2efe6",
+        "id": "0362bcb55c780116",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Fetch Database Data",
+        "func": "msg.topic = `SELECT * FROM user;`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2030,
+        "y": 340,
+        "wires": [
+            [
+                "c39393a4587ea9c2",
+                "a402df3fc42fe84a"
+            ]
+        ]
+    },
+    {
+        "id": "c39393a4587ea9c2",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 2280,
+        "y": 340,
+        "wires": [
+            [
+                "04af46e1682adb01",
+                "58e610e86554f24b"
+            ]
+        ]
+    },
+    {
+        "id": "04af46e1682adb01",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Format Database Response",
+        "func": "msg.payload = {\n    success: true,\n    data: {\n        user: msg.payload\n    }\n};\nmsg.headers = {'content-type': 'application/json'};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2580,
+        "y": 340,
+        "wires": [
+            [
+                "f080947773999498",
+                "e1767eceec7feb9c"
+            ]
+        ]
+    },
+    {
+        "id": "f080947773999498",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {},
+        "x": 2840,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "f42c9c86190f24e2",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 84",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2000,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "a402df3fc42fe84a",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 85",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2260,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "58e610e86554f24b",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 86",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2520,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e1767eceec7feb9c",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 87",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2820,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "e02742d34367c5a8",
+        "type": "http in",
+        "z": "3f73e11d2319b810",
+        "name": "Delete User",
+        "url": "/deleteUser",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1770,
+        "y": 700,
+        "wires": [
+            [
+                "0f31a6e4f024bd38",
+                "21f1e71eacfd7726"
+            ]
+        ]
+    },
+    {
+        "id": "0f31a6e4f024bd38",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Check Delete User",
+        "func": "var username = msg.payload.username;\n\n// Construct SQL query\nmsg.topic = `DELETE FROM user WHERE username='${username}'`;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2010,
+        "y": 700,
+        "wires": [
+            [
+                "6169d2ac2ad31327",
+                "ba9aa73a7c896064"
+            ]
+        ]
+    },
+    {
+        "id": "6169d2ac2ad31327",
+        "type": "mysql",
+        "z": "3f73e11d2319b810",
+        "mydb": "d9934cbb1e248bee",
+        "name": "",
+        "x": 2280,
+        "y": 700,
+        "wires": [
+            [
+                "63ca2c20731de841",
+                "98342c37850efaa9"
+            ]
+        ]
+    },
+    {
+        "id": "63ca2c20731de841",
+        "type": "function",
+        "z": "3f73e11d2319b810",
+        "name": "Format Delete Response",
+        "func": "var deleted = msg.payload.affectedRows > 0;\n\nvar response = {\n    deleted: deleted\n};\n\nmsg.payload = response;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2570,
+        "y": 700,
+        "wires": [
+            [
+                "2393961b51049cae",
+                "5ac7314577c3e238"
+            ]
+        ]
+    },
+    {
+        "id": "2393961b51049cae",
+        "type": "http response",
+        "z": "3f73e11d2319b810",
+        "name": "HTTP Response",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "application/json"
+        },
+        "x": 2840,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "21f1e71eacfd7726",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 92",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2000,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "ba9aa73a7c896064",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 93",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2260,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "98342c37850efaa9",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 94",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2520,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "5ac7314577c3e238",
+        "type": "debug",
+        "z": "3f73e11d2319b810",
+        "name": "debug 95",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 2820,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "d9934cbb1e248bee",
         "type": "MySQLdatabase",
-        "name": "bank_database",
-        "host": "localhost",
+        "name": "",
+        "host": "127.0.0.1",
         "port": "3306",
         "db": "bank_database",
         "tz": "",

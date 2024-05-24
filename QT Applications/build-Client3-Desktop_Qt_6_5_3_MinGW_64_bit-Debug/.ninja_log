@@ -1,0 +1,15 @@
+# ninja log v5
+33	1562	7382171388332116	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Client3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Client3_autogen/timestamp	b97ef556ee8f7111
+33	1562	7382171388332116	Client3_autogen/mocs_compilation.cpp	b97ef556ee8f7111
+33	1562	7382171388332116	Client3_autogen/timestamp	b97ef556ee8f7111
+10504	11334	7382171487305484	Client3.exe	1e4b8fd3492b39d6
+33	1562	7382171388332116	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Client3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Client3_autogen/mocs_compilation.cpp	b97ef556ee8f7111
+1570	8996	7382171464058787	CMakeFiles/Client3.dir/Client3_autogen/mocs_compilation.cpp.obj	870d69845ec42682
+1563	8453	7382171458611926	CMakeFiles/Client3.dir/main.cpp.obj	530ab766ebb50c6b
+1582	10503	7382171479080185	CMakeFiles/Client3.dir/client.cpp.obj	e4862cafc84488e4
+38	382	7382172552954148	Client3_autogen/timestamp	b97ef556ee8f7111
+38	382	7382172552954148	Client3_autogen/mocs_compilation.cpp	b97ef556ee8f7111
+38	382	7382172552954148	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Client3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Client3_autogen/timestamp	b97ef556ee8f7111
+38	382	7382172552954148	C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Client3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug/Client3_autogen/mocs_compilation.cpp	b97ef556ee8f7111
+393	7199	7382172621135133	CMakeFiles/Client3.dir/client.cpp.obj	e4862cafc84488e4
+7200	7698	7382172626052320	Client3.exe	1e4b8fd3492b39d6

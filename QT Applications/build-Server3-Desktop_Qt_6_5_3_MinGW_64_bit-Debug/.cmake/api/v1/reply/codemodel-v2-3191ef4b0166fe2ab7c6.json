@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-29e1bbb2891a8988073d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Server3",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Server3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Server3-Debug-65a00a6ff40c14af6d8b.json",
+					"name" : "Server3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Server3_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Server3_autogen-Debug-bb409862f10dd2892c9c.json",
+					"name" : "Server3_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Server3_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Server3_autogen_timestamp_deps-Debug-42fbcbc04df7674ee5da.json",
+					"name" : "Server3_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/build-Server3-Desktop_Qt_6_5_3_MinGW_64_bit-Debug",
+		"source" : "C:/Users/Mostafa Ashraf/Desktop/ITIDA/QT_WS/Server3"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
